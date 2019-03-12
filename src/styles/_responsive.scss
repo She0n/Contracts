@@ -1,0 +1,10 @@
+//contracts
+@media (max-width: 1599px) {
+  .contracts-block {
+    .block .inline-fields {
+      & > .c-field__label {
+        display: none;
+      }
+    }
+  }
+}

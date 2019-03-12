@@ -1,0 +1,105 @@
+//Отложенный спрос
+//1-2 недели
+if (el.params['STATUS_NEW'] === '21809302') {
+  data.forEach((elem) => {
+    if (el['element_id'] === elem.id) {
+      this.data['os-1']++;
+    }
+  });
+}
+//1-2 месяца
+if (el.params['STATUS_NEW'] === '20611690') {
+  data.forEach((elem) => {
+    if (el['element_id'] === elem.id) {
+      this.data['os-2']++;
+    }
+  });
+}
+//3-6 месяцев
+if (el.params['STATUS_NEW'] === '20122243') {
+  data.forEach((elem) => {
+    if (el['element_id'] === elem.id) {
+      this.data['os-3']++;
+    }
+  });
+}
+//6-9 месяцев
+if (el.params['STATUS_NEW'] === '20122246') {
+  data.forEach((elem) => {
+    if (el['element_id'] === elem.id) {
+      this.data['os-4']++;
+    }
+  });
+}
+//9-12 месяцев
+if (el.params['STATUS_NEW'] === '20122249') {
+  data.forEach((elem) => {
+    if (el['element_id'] === elem.id) {
+      this.data['os-5']++;
+    }
+  });
+}
+//Более 12 месяцев
+if (el.params['STATUS_NEW'] === '20152585') {
+  data.forEach((elem) => {
+    if (el['element_id'] === elem.id) {
+      this.data['os-6']++;
+    }
+  });
+}
+
+async printContracts() {
+        if (!this.validateFields()) {
+          return false;
+        }
+        this.fields.file = 'print';
+        let resp = await axios.post('/createContracts', this.fields);
+        if (resp.data) {
+          if (!resp.data.display) {
+            resp.data = resp.data.replace(new RegExp('<p>&nbsp;</p>', 'g'), '<br>');
+            let date = resp.data.match('<p style="text-align: justify; margin-top: 0; margin-bottom: 0;">г. Санкт-Петербург (.*)</p>');
+            resp.data = resp.data.replace(new RegExp('<p style="text-align: justify; margin-top: 0; margin-bottom: 0;"><span style="font-style: italic;">Гражданин', 'g'),
+              '<p style="text-indent: 2.5em; text-align: justify; margin-top: 0; margin-bottom: 0;"><span style="font-style: italic;">Гражданин(ка),');
+            resp.data = resp.data.replace(new RegExp('<p style="text-align: justify; margin-top: 0; margin-bottom: 0;">1', 'g'),
+              '<p style="text-indent: 2.5em; text-align: justify; margin-top: 0; margin-bottom: 0;">1');
+            resp.data = resp.data.replace(new RegExp('<p style="text-align: justify; margin-top: 0; margin-bottom: 0;">2', 'g'),
+              '<p style="text-indent: 2.5em; text-align: justify; margin-top: 0; margin-bottom: 0;">2');
+            resp.data = resp.data.replace(new RegExp('<p style="text-align: justify; margin-top: 0; margin-bottom: 0;">3', 'g'),
+              '<p style="text-indent: 2.5em; text-align: justify; margin-top: 0; margin-bottom: 0;">3');
+            resp.data = resp.data.replace(new RegExp('<p style="text-align: justify; margin-top: 0; margin-bottom: 0;"><span style="font-weight: bold;">3', 'g'),
+              '<p style="text-indent: 2.5em; text-align: justify; margin-top: 0; margin-bottom: 0;"><span style="font-weight: bold;">3');
+            resp.data = resp.data.replace(new RegExp('<p style="text-align: justify; margin-top: 0; margin-bottom: 0;">4', 'g'),
+              '<p style="text-indent: 2.5em; text-align: justify; margin-top: 0; margin-bottom: 0;">4');
+            resp.data = resp.data.replace(new RegExp('<p style="text-align: justify; margin-top: 0; margin-bottom: 0;">5', 'g'),
+              '<p style="text-indent: 2.5em; text-align: justify; margin-top: 0; margin-bottom: 0;">5');
+            resp.data = resp.data.replace(new RegExp('<p style="text-align: justify; margin-top: 0; margin-bottom: 0;">Документами', 'g'),
+              '<p style="text-indent: 2.5em; text-align: justify; margin-top: 0; margin-bottom: 0;">Документами');
+            resp.data = resp.data.replace(new RegExp('<p style="text-align: justify; margin-top: 0; margin-bottom: 0;">-', 'g'),
+              '<p style="text-indent: 2.5em; text-align: justify; margin-top: 0; margin-bottom: 0;">-');
+            resp.data = resp.data.replace(new RegExp('<p style="text-align: justify; margin-top: 0; margin-bottom: 0;">Исполнять', 'g'),
+              '<p style="text-indent: 2.5em; text-align: justify; margin-top: 0; margin-bottom: 0;">Исполнять');
+            resp.data = resp.data.replace(new RegExp('<p style="text-align: justify; margin-top: 0; margin-bottom: 0;">Расчет', 'g'),
+              '<p style="text-indent: 2.5em; text-align: justify; margin-top: 0; margin-bottom: 0;">Расчет');
+            resp.data = resp.data.replace(new RegExp('<p style="text-align: justify; margin-top: 0; margin-bottom: 0;">Срок', 'g'),
+              '<p style="text-indent: 2.5em; text-align: justify; margin-top: 0; margin-bottom: 0;">Срок');
+            resp.data = resp.data.replace(new RegExp('<p style="text-align: justify; margin-top: 0; margin-bottom: 0;">При', 'g'),
+              '<p style="text-indent: 2.5em; text-align: justify; margin-top: 0; margin-bottom: 0;">При');
+            resp.data = resp.data.replace(new RegExp('<p style="text-align: justify; margin-top: 0; margin-bottom: 0;">6', 'g'),
+              '<p style="text-indent: 2.5em; text-align: justify; margin-top: 0; margin-bottom: 0;">6');
+            resp.data = resp.data.replace(new RegExp('<p style="text-align: justify; margin-top: 0; margin-bottom: 0;">7', 'g'),
+              '<p style="text-indent: 2.5em; text-align: justify; margin-top: 0; margin-bottom: 0;">7');
+            resp.data = resp.data.replace(new RegExp('<p style="text-align: justify; margin-top: 0; margin-bottom: 0;">8', 'g'),
+              '<p style="text-indent: 2.5em; text-align: justify; margin-top: 0; margin-bottom: 0;">8');
+            resp.data = resp.data.replace(new RegExp('<p style="text-align: justify; margin-top: 0; margin-bottom: 0;">9', 'g'),
+              '<p style="text-indent: 2.5em; text-align: justify; margin-top: 0; margin-bottom: 0;">9');
+            resp.data = resp.data.replace(new RegExp('<p style="text-align: justify; margin-top: 0; margin-bottom: 0;">Окончание', 'g'),
+              '<p style="text-indent: 2.5em; text-align: justify; margin-top: 0; margin-bottom: 0;">Окончание');
+            let link = document.getElementById('printFrame').contentWindow;
+            link.document.open();
+            link.document.write(resp.data);
+            link.print();
+          } else {
+            toastr.error(resp.data.display);
+          }
+        }
+      },
